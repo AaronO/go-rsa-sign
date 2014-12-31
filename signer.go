@@ -36,7 +36,7 @@ func (s *Signer) Sign(data []byte) ([]byte, error) {
 func (s *Signer) SignHex(data []byte) (string, error) {
 	sig, err := s.Sign(data)
 	if err != nil {
-		return err
+		return "", err
 	}
 	return hex.EncodeToString(sig), nil
 }
@@ -44,7 +44,7 @@ func (s *Signer) SignHex(data []byte) (string, error) {
 func (s *Signer) SignBase64(data []byte) (string, error) {
 	sig, err := s.Sign(data)
 	if err != nil {
-		return err
+		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(sig), nil
 }
