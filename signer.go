@@ -4,11 +4,8 @@ import (
 	"crypto"
 	"crypto/rand"
 	"crypto/rsa"
-	"crypto/x509"
 	"encoding/base64"
 	"encoding/hex"
-	"encoding/pem"
-	"errors"
 )
 
 type Signer struct {
@@ -47,13 +44,4 @@ func (s *Signer) SignBase64(data []byte) (string, error) {
 		return "", err
 	}
 	return base64.StdEncoding.EncodeToString(sig), nil
-}
-
-func parsePrivateKey(data []byte) (*rsa.PrivateKey, error) {
-	block, _ := pem.Decode(data)
-	if block == nil {
-		return nil, errors.New("No PEM block found")
-	}
-
-	return x509.ParsePKCS1PrivateKey(block.Bytes)
 }
