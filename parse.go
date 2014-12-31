@@ -8,7 +8,7 @@ import (
 )
 
 func parsePrivateKey(data []byte) (*rsa.PrivateKey, error) {
-	pemData, err := pemParse(data, "PRIVATE KEY")
+	pemData, err := pemParse(data, "RSA PRIVATE KEY")
 	if err != nil {
 		return nil, err
 	}
