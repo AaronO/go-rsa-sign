@@ -16,7 +16,7 @@ type Signer struct {
 }
 
 func NewSigner(pemKey []byte) (*Signer, error) {
-	key, err := parseKey(pemKey)
+	key, err := parsePrivateKey(pemKey)
 	if err != nil {
 		return nil, err
 	}
@@ -49,7 +49,7 @@ func (s *Signer) SignBase64(data []byte) (string, error) {
 	return base64.StdEncoding.EncodeToString(sig), nil
 }
 
-func parseKey(data []byte) (*rsa.PrivateKey, error) {
+func parsePrivateKey(data []byte) (*rsa.PrivateKey, error) {
 	block, _ := pem.Decode(data)
 	if block == nil {
 		return nil, errors.New("No PEM block found")
